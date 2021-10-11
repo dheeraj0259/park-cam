@@ -1,0 +1,5 @@
+.navbar-title {
+    background: -webkit-linear-gradient(#0F2027, #203A43);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

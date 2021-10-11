@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 export default function LandingImg() {
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "100%", height: "100vh" }}>
     <CardMedia
         sx={{ height: "94vh" }}
         component="img"

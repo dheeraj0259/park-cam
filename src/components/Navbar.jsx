@@ -1,7 +1,10 @@
-import { Login, AppRegistration } from '@mui/icons-material';
+import { Login, AppRegistration, Videocam } from '@mui/icons-material';
+
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import "../styles/navbar.css";
 
 // ----------------------------------------------------------------------
 
@@ -37,10 +40,12 @@ export default function Navbar() {
       <ToolbarStyle>
           <Logo />
 
-        <Box sx={{ flexGrow: 1 }} />
+      <Typography variant="h4" className="navbar-title" sx={{ letterSpacing: 8, m: 1, flexGrow: 1 }} component="div">
+      <Box>Park C<Videocam fontSize="large" sx={{ color: "#ffb500", position: "relative", top: 8, right: 3 }} />mera</Box>
+      </Typography>
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-        <AppRegistration fontSize="large" sx={{ color: "#ffb500" }} />
+        <AppRegistration fontSize="large" sx={{ color: "black" }} />
         <Login fontSize="large" sx={{ color: "#ffb500" }} />
         </Stack>
       </ToolbarStyle>
