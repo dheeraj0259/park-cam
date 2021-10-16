@@ -40,9 +40,7 @@ export default function Navbar() {
       <ToolbarStyle>
           <Logo />
 
-      <Typography variant="h4" className="navbar-title" sx={{ letterSpacing: 8, m: 1, flexGrow: 1 }} component="div">
-      <Box>Park C<Videocam fontSize="large" sx={{ color: "#ffb500", position: "relative", top: 8, right: 3 }} />mera</Box>
-      </Typography>
+      <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
         <AppRegistration fontSize="large" sx={{ color: "black" }} />
