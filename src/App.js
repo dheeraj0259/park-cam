@@ -1,10 +1,15 @@
 import './App.css';
-import Home from './pages/Home';
+// routes
+import Router from './routes';
+// theme
+import ThemeConfig from './theme';
+import GlobalStyles from './theme/globalStyles';
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <ThemeConfig>
+      <GlobalStyles />
+      <Router />
+    </ThemeConfig>
   );
 }
 
