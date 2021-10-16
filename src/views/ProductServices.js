@@ -16,7 +16,7 @@ function ProductServices() {
   return (
     <Box
       component="section"
-      sx={{ display: 'flex', overflow: 'hidden', bgcolor: '#fff5f8' }}
+      sx={{ display: 'flex', overflow: 'hidden', bgcolor: '#fbb5031f' }}
     >
       <Container sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
         <Box

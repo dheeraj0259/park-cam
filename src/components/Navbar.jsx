@@ -1,9 +1,8 @@
-import { Login, AppRegistration, Videocam } from '@mui/icons-material';
+import { Login, AppRegistration } from '@mui/icons-material';
 
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Box, Stack, AppBar, Toolbar } from '@mui/material';
 import "../styles/navbar.css";
 
 // ----------------------------------------------------------------------
