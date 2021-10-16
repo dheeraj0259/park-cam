@@ -1,18 +1,23 @@
 import React from 'react';
 import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 export default function LandingContent() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500 }}>
+    <CardMedia
+        component="img"
+        image="/static/landing.jpg"
+        alt="park cam"
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          Park Cam
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          Park cam provides services in identifying incoming and ongoing vehicle licence plate
         </Typography>
       </CardContent>
     </Card>

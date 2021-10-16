@@ -38,10 +38,8 @@ export default function Navbar() {
   return (
     <RootStyle>
       <ToolbarStyle>
-          <Logo />
-
-      <Box sx={{ flexGrow: 1 }} />
-
+        <Logo />
+        <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
         <AppRegistration fontSize="large" sx={{ color: "black" }} />
         <Login fontSize="large" sx={{ color: "#ffb500" }} />
