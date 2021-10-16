@@ -1,13 +1,19 @@
 import React from "react";
+import Grid from '@mui/material/Grid';
 import Navbar from "../components/Navbar";
 import LandingImg from "../components/LandingImg";
+import LandingContent from "../components/LandingContent";
 
 const Home = () => {
     return (
-        <div>
+        <Grid container>
+            <Grid>
            <Navbar />
-           <LandingImg />
-        </div>
+           </Grid>
+           <Grid>
+           <LandingContent />
+           </Grid>
+        </Grid>
     )
 };
 
