@@ -2,7 +2,7 @@ import { Login, AppRegistration } from '@mui/icons-material';
 
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import "../styles/navbar.css";
 
 // ----------------------------------------------------------------------
@@ -37,11 +37,17 @@ export default function Navbar() {
   return (
     <RootStyle>
       <ToolbarStyle>
+        <IconButton href="/">
         <Logo />
+        </IconButton>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+        <IconButton href="/sign-up">
         <AppRegistration fontSize="large" sx={{ color: "black" }} />
+        </IconButton>
+        <IconButton href="/log-in">
         <Login fontSize="large" sx={{ color: "#ffb500" }} />
+        </IconButton>
         </Stack>
       </ToolbarStyle>
     </RootStyle>
