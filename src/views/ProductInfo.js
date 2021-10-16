@@ -33,7 +33,7 @@ export default function ProductInfo() {
         Low installation and maintenance cost.
       </Typography>
       <Button
-        color="secondary"
+        color="warning"
         variant="contained"
         size="large"
         component="a"
