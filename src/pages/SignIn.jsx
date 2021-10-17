@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -11,6 +11,13 @@ import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 
 function SignIn() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+  
+    const handleSubmit = () => {
+        let result = { email, password };
+        console.log("Result: ", result);
+    }
   const renderForm = () => {
       return (
         <Box component="form" noValidate sx={{ mt: 6 }}>
@@ -22,6 +29,8 @@ function SignIn() {
                 id="outlined-required"
                 label="Email"
                 color="warning"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -30,8 +39,10 @@ function SignIn() {
               required
               color="warning"
               id="outlined-required"
-              name="password"
+              type="password"
               label="Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               />
           </Grid>
           <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }} item xs={12} sm={12}>
@@ -40,9 +51,8 @@ function SignIn() {
                 color="warning"
                 variant="contained"
                 size="large"
-                component="a"
-                href="/sign-up/"
                 sx={{ minWidth: 200, mt: 3, mb: 2 }}
+                onClick={handleSubmit}
             >
              SIGN IN
             </Button>
