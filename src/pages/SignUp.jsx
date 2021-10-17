@@ -28,8 +28,14 @@ function SignUp() {
     }).catch(err => console.error("Error while getting users: ", err));
   }, [])
 
-  const inValidEmail = () => {
+  const isValidEmail = () => {
     if(!email.includes("@") || !email.includes(".com")) return true;
+    return false;
+}
+
+  const isEmailExisting = () => {
+    const user = users.find(item => item.id === email);
+    if(user) return true;
     return false;
 }
 
@@ -40,12 +46,15 @@ function SignUp() {
         if(!firstName) errState.firstName = true;
         if(!lastName) errState.lastName = true;
         if(!email) errState.email = true;
-        if(email && inValidEmail()) errState.email = true;
+        if(email && isValidEmail()) errState.email = true;
+        if(email && isEmailExisting()) errState.email = true;
         if(!password) errState.password = true;
         setInputErr(errState);
       } else {
+        // set state changes
         setInputErr(errState);
         setLoading(true);
+        // add user to db
         let result = { firstName, lastName, id: email, password };
         addUser(result).then(res => {
           setTimeout(() => setLoading(false), 2000);
@@ -57,7 +66,7 @@ function SignUp() {
   }
 
   const isMissingRequiredValues = () => {
-      if(!firstName || !lastName || !email || !password || inValidEmail()) return true;
+      if(!firstName || !lastName || !email || !password || isValidEmail() || isEmailExisting()) return true;
       else return false;
   }
 
@@ -73,6 +82,12 @@ function SignUp() {
     }
     handler(value);
   };
+
+  const getEmailErrorMsg = () => {
+    if(inputErr["email"] && isValidEmail()) return "Invalid email (Please provide valid email address)";
+    if(isEmailExisting()) return "Account already exists with this email. Please use different email."
+    return "";
+  }
 
   const renderForm = () => {
       return (
@@ -102,13 +117,13 @@ function SignUp() {
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
-                error={inputErr["email"]}
+                error={isEmailExisting() || inputErr["email"]}
                 fullWidth
                 required
                 id="outlined-required"
                 label="Email"
                 color="warning"
-                helperText={inputErr["email"] && inValidEmail() ? "Invalid email (Please provide valid email address)": ""}
+                helperText={getEmailErrorMsg()}
                 value={email}
                 onChange={(event) => handleLocalState("email", event.target.value, setEmail)}
             />
