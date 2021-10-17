@@ -10,7 +10,7 @@ const Home = () => {
             {/* <Grid item xs={12}>
            <Navbar />
            </Grid> */}
-           <Grid item xs={12}>
+           <Grid style={{ marginTop: "9vh" }} item xs={12}>
            <ProductInfo />
            </Grid>
            <Grid item xs={12}>
