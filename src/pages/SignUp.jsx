@@ -11,15 +11,46 @@ import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 
 function SignUp() {
+  const DEFAULT_ERR_STATE = {firstName: false, lastName: false, email: false, password: false};  
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
 
   const handleSubmit = () => {
-      let result = { firstName, lastName, email, password };
-      console.log("Result: ", result);
+      const isInvalid = isMissingRequiredValues();
+      let errState = DEFAULT_ERR_STATE;
+      if(isInvalid) {
+        if(!firstName) errState.firstName = true;
+        if(!lastName) errState.lastName = true;
+        if(!email) errState.email = true;
+        if(!password) errState.password = true;
+        setInputErr(errState);
+      } else {
+        setInputErr(errState);
+        let result = { firstName, lastName, email, password };
+        console.log("Result: ", result);
+      }
   }
+
+  const isMissingRequiredValues = () => {
+      if(!firstName || !lastName || !email || !password) return true;
+      else return false;
+  }
+
+  const handleLocalState = (field, value, handler) => {
+    if(!value) setInputErr(currentState => {
+        return { ...currentState, [field]: true };
+    }) 
+
+    if(value) {
+        setInputErr(currentState => {
+            return { ...currentState, [field]: false };
+        }) 
+    }
+    handler(value);
+  };
 
   const renderForm = () => {
       return (
@@ -27,37 +58,41 @@ function SignUp() {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
              <TextField
+              error={inputErr["firstName"]}
               required
               id="outlined-required"
               label="First name"
               color="warning"
               value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
+              onChange={(event) => handleLocalState("firstName", event.target.value, setFirstName)}
               />
           </Grid>
           <Grid item xs={12} sm={6}>
              <TextField
+              error={inputErr["lastName"]}
               required
               id="outlined-required"
               label="Last name"
               color="warning"
               value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
+              onChange={(event) => handleLocalState("lastName", event.target.value, setLastName)}
               />
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
+                error={inputErr["email"]}
                 fullWidth
                 required
                 id="outlined-required"
                 label="Email"
                 color="warning"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => handleLocalState("email", event.target.value, setEmail)}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
           <TextField
+             error={inputErr["password"]}
              fullWidth
               required
               color="warning"
@@ -65,7 +100,7 @@ function SignUp() {
               type="password"
               label="Password"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => handleLocalState("password", event.target.value, setPassword)}
               />
           </Grid>
           <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }} item xs={12} sm={12}>
