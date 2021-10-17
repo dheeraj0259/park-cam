@@ -8,36 +8,12 @@ import { Container, Paper } from '@mui/material';
 import Typography from '../components/Typography';
 import Button from '../components/Button';
 
-function SignUp() {
-  const [sent, setSent] = React.useState(false);
-
-  const handleSubmit = () => {
-    setSent(true);
-  };
-
+function SignIn() {
   const renderForm = () => {
       return (
         <Box component="form" noValidate sx={{ mt: 6 }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-             <TextField
-              required
-              id="outlined-required"
-              label="First name"
-              color="warning"
-              defaultValue="Hello World"
-              />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-             <TextField
-              required
-              id="outlined-required"
-              label="Last name"
-              color="warning"
-              defaultValue="Hello World"
-              />
-          </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item sx={{ mb: 2 }} xs={12} sm={12}>
             <TextField
                 fullWidth
                 required
@@ -67,7 +43,7 @@ function SignUp() {
                 href="/sign-up/"
                 sx={{ minWidth: 200, mt: 3, mb: 2 }}
             >
-             SIGN UP
+             SIGN IN
             </Button>
           </Grid>
         </Grid>
@@ -91,11 +67,12 @@ function SignUp() {
             sx={{ py: { xs: 4, md: 8 }, px: { xs: 3, md: 6 } }}
           >
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign Up
+            Sign In
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2" align="center">
-            <Link href="/sign-in/" underline="always">
-              Already have an account?
+            {'Not a member yet? '}
+            <Link href="/sign-up/" align="center" underline="always">
+            Sign Up here
             </Link>
           </Typography>
         {renderForm()}
@@ -107,4 +84,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;
