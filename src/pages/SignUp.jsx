@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
-
+// components
 import Typography from '../components/Typography';
 import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
+// services
+import { getUsers, addUser } from "../services/user";
 
 function SignUp() {
   const DEFAULT_ERR_STATE = {firstName: false, lastName: false, email: false, password: false};  
@@ -17,6 +19,14 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers().then(res => {
+      setUsers(res.data);
+    }).catch(err => console.error("Error while getting users: ", err));
+  }, [])
 
   const inValidEmail = () => {
     if(!email.includes("@") || !email.includes(".com")) return true;
@@ -35,8 +45,14 @@ function SignUp() {
         setInputErr(errState);
       } else {
         setInputErr(errState);
-        let result = { firstName, lastName, email, password };
-        console.log("Result: ", result);
+        setLoading(true);
+        let result = { firstName, lastName, id: email, password };
+        addUser(result).then(res => {
+          setTimeout(() => setLoading(false), 2000);
+        }).catch(err => {
+          setLoading(false);
+          console.error("Error while adding user: ", err);
+        });
       }
   }
 
@@ -116,10 +132,11 @@ function SignUp() {
                 color="warning"
                 variant="contained"
                 size="large"
+                disabled={loading}
                 sx={{ minWidth: 200, mt: 3, mb: 2 }}
                 onClick={handleSubmit}
             >
-             SIGN UP
+             { loading ? "Loading..." : "SIGN UP" }
             </Button>
             </motion.div>
           </Grid>
