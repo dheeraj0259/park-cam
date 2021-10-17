@@ -71,7 +71,7 @@ function SignIn() {
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2" align="center">
             {'Not a member yet? '}
-            <Link href="/sign-up/" align="center" underline="always">
+            <Link color="error" href="/sign-up/" align="center" underline="always">
             Sign Up here
             </Link>
           </Typography>

@@ -94,7 +94,7 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2" align="center">
-            <Link href="/sign-in/" underline="always">
+            <Link color="error" href="/sign-in/" underline="always">
               Already have an account?
             </Link>
           </Typography>
