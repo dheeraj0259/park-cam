@@ -4,9 +4,11 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import Typography from '../components/Typography';
 import Button from '../components/Button';
+import { MotionContainer, varBounceIn } from '../components/animate';
 
 function SignIn() {
   const renderForm = () => {
@@ -20,7 +22,6 @@ function SignIn() {
                 id="outlined-required"
                 label="Email"
                 color="warning"
-                defaultValue="Hello World"
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -31,10 +32,10 @@ function SignIn() {
               id="outlined-required"
               name="password"
               label="Password"
-              defaultValue="Hello World"
               />
           </Grid>
           <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }} item xs={12} sm={12}>
+          <motion.div variants={varBounceIn}>
             <Button
                 color="warning"
                 variant="contained"
@@ -45,6 +46,7 @@ function SignIn() {
             >
              SIGN IN
             </Button>
+            </motion.div>
           </Grid>
         </Grid>
       </Box>
@@ -53,6 +55,7 @@ function SignIn() {
 
   return (
     <Container style={{ marginTop: 100 }} >
+    <MotionContainer initial="initial" open>
     <Box
       sx={{
         display: 'flex',
@@ -80,6 +83,7 @@ function SignIn() {
         </Box>
         </Container>
         </Box>
+        </MotionContainer>
     </Container>
   );
 }
