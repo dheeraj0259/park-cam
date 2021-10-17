@@ -18,6 +18,11 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
 
+  const inValidEmail = () => {
+    if(!email.includes("@") || !email.includes(".com")) return true;
+    return false;
+}
+
   const handleSubmit = () => {
       const isInvalid = isMissingRequiredValues();
       let errState = DEFAULT_ERR_STATE;
@@ -25,6 +30,7 @@ function SignUp() {
         if(!firstName) errState.firstName = true;
         if(!lastName) errState.lastName = true;
         if(!email) errState.email = true;
+        if(email && inValidEmail()) errState.email = true;
         if(!password) errState.password = true;
         setInputErr(errState);
       } else {
@@ -35,7 +41,7 @@ function SignUp() {
   }
 
   const isMissingRequiredValues = () => {
-      if(!firstName || !lastName || !email || !password) return true;
+      if(!firstName || !lastName || !email || !password || inValidEmail()) return true;
       else return false;
   }
 
@@ -86,6 +92,7 @@ function SignUp() {
                 id="outlined-required"
                 label="Email"
                 color="warning"
+                helperText={inputErr["email"] && inValidEmail() ? "Invalid email (Please provide valid email address)": ""}
                 value={email}
                 onChange={(event) => handleLocalState("email", event.target.value, setEmail)}
             />

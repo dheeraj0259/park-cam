@@ -21,6 +21,7 @@ function SignIn() {
         let errState = DEFAULT_ERR_STATE;
         if(isInvalid) {
           if(!email) errState.email = true;
+          if(email && inValidEmail()) errState.email = true;
           if(!password) errState.password = true;
           setInputErr(errState);
         } else {
@@ -29,8 +30,13 @@ function SignIn() {
         }
     }
 
+    const inValidEmail = () => {
+        if(!email.includes("@") || !email.includes(".com")) return true;
+        return false;
+    }
+
     const isMissingRequiredValues = () => {
-        if(!email || !password) return true;
+        if(!email || !password || inValidEmail) return true;
         else return false;
     }
 
@@ -59,6 +65,7 @@ function SignIn() {
                 id="outlined-required"
                 label="Email"
                 color="warning"
+                helperText={inputErr["email"] && inValidEmail() ? "Invalid email (Please provide valid email address)": ""}
                 value={email}
                 onChange={(event) => handleLocalState("email", event.target.value, setEmail)}
             />
