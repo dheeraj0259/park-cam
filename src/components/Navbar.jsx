@@ -45,7 +45,7 @@ export default function Navbar() {
         <IconButton href="/sign-up">
         <AppRegistration fontSize="large" sx={{ color: "black" }} />
         </IconButton>
-        <IconButton href="/log-in">
+        <IconButton href="/sign-in">
         <Login fontSize="large" sx={{ color: "#ffb500" }} />
         </IconButton>
         </Stack>
