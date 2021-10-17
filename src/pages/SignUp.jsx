@@ -4,7 +4,9 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
+
 import Typography from '../components/Typography';
+import Button from '../components/Button';
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
@@ -22,6 +24,7 @@ function SignUp() {
               required
               id="outlined-required"
               label="First name"
+              color="warning"
               defaultValue="Hello World"
               />
           </Grid>
@@ -30,24 +33,44 @@ function SignUp() {
               required
               id="outlined-required"
               label="Last name"
+              color="warning"
               defaultValue="Hello World"
               />
           </Grid>
-        </Grid>
-        <TextField
-          required
-          id="outlined-required"
-          label="Email"
-          defaultValue="Hello World"
-          />
-             <TextField
+          <Grid item xs={12} sm={12}>
+            <TextField
+                fullWidth
+                required
+                id="outlined-required"
+                label="Email"
+                color="warning"
+                defaultValue="Hello World"
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+          <TextField
              fullWidth
               required
+              color="warning"
               id="outlined-required"
               name="password"
               label="Password"
               defaultValue="Hello World"
               />
+          </Grid>
+          <Grid style={{ display: "flex", alignItems: "center", justifyContent: "center" }} item xs={12} sm={12}>
+            <Button
+                color="warning"
+                variant="contained"
+                size="large"
+                component="a"
+                href="/sign-up/"
+                sx={{ minWidth: 200 }}
+            >
+             SIGN UP
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
       )
   }
