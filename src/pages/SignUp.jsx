@@ -5,12 +5,15 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
+import AWN from "awesome-notifications"
 // components
 import Typography from '../components/Typography';
 import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 // services
 import { getUsers, addUser } from "../services/user";
+
+let notifier = new AWN({ position: "top-right" })
 
 function SignUp() {
   const DEFAULT_ERR_STATE = {firstName: false, lastName: false, email: false, password: false};  
@@ -57,9 +60,13 @@ function SignUp() {
         // add user to db
         let result = { firstName, lastName, id: email, password };
         addUser(result).then(res => {
-          setTimeout(() => setLoading(false), 2000);
+          setTimeout(() => {
+            notifier.success("Congratulations, your account has been successfully created ", { durations: { success: 0 }});
+            setLoading(false)
+          }, 2000);
         }).catch(err => {
           setLoading(false);
+          notifier.error("Something went wrong, please try again later", { durations: { success: 0 }});
           console.error("Error while adding user: ", err);
         });
       }
