@@ -31,17 +31,22 @@ function SignIn() {
             let result = { email, password };
             getUser({ id: email, password }).then(res => {
               if(!res.data || (res.data && !res.data.length) ) throw new Error("UserNotFound");
-              const { hide } = cogoToast.success('Authentication Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success',   onClick: () => {
+              const { hide } = cogoToast.success('Authentication Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
                 hide();
               }, hideAfter: 4 });
             }).catch(err => {
               let msg = "Something went wrong, please refresh page and try again.";
               let heading = "Error";
               if(err.message === "UserNotFound") { 
-                msg = "No Account exists with the entered details. Please sign-up and try again";
-                heading = "User not found"
+                msg = "Login Failed. Please check entered email/password are right.";
+                heading = "UNAUTHORIZED"
               }
-              cogoToast.error(msg, { position: 'top-right', heading, hideAfter: 4 });
+              const {hide} = cogoToast.error(
+                msg, 
+                { position: 'top-right', heading, hideAfter: 0, onClick: () => {
+                  hide();
+                } }
+                );
               console.error("Error while adding user: ", err);
             })
             console.log("Result: ", result);
