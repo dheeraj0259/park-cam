@@ -5,15 +5,13 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
-import AWN from "awesome-notifications"
+import cogoToast from 'cogo-toast';
 // components
 import Typography from '../components/Typography';
 import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 // services
 import { getUsers, addUser } from "../services/user";
-
-let notifier = new AWN({ position: "top-right" })
 
 function SignUp() {
   const DEFAULT_ERR_STATE = {firstName: false, lastName: false, email: false, password: false};  
@@ -61,12 +59,14 @@ function SignUp() {
         let result = { firstName, lastName, id: email, password };
         addUser(result).then(res => {
           setTimeout(() => {
-            notifier.success("Congratulations, your account has been successfully created ", { durations: { success: 0 }});
+          const { hide } = cogoToast.success('Congratulations, your account has been successfully created.', { position: 'top-right', heading: 'Success',   onClick: () => {
+            hide();
+          }, hideAfter: 4 });
             setLoading(false)
           }, 2000);
         }).catch(err => {
           setLoading(false);
-          notifier.error("Something went wrong, please try again later", { durations: { success: 0 }});
+          cogoToast.error('Something went wrong, please refresh page and try again.', { position: 'top-right', heading: 'Error', hideAfter: 4 });
           console.error("Error while adding user: ", err);
         });
       }
