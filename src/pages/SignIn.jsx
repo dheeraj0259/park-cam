@@ -5,10 +5,13 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
+import cogoToast from 'cogo-toast';
 
 import Typography from '../components/Typography';
 import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
+// services
+import { getUser } from "../services/user";
 
 function SignIn() {
     const DEFAULT_ERR_STATE = {email: false, password: false};  
@@ -26,6 +29,21 @@ function SignIn() {
           setInputErr(errState);
         } else {
             let result = { email, password };
+            getUser({ id: email, password }).then(res => {
+              if(!res.data || (res.data && !res.data.length) ) throw new Error("UserNotFound");
+              const { hide } = cogoToast.success('Authentication Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success',   onClick: () => {
+                hide();
+              }, hideAfter: 4 });
+            }).catch(err => {
+              let msg = "Something went wrong, please refresh page and try again.";
+              let heading = "Error";
+              if(err.message === "UserNotFound") { 
+                msg = "No Account exists with the entered details. Please sign-up and try again";
+                heading = "User not found"
+              }
+              cogoToast.error(msg, { position: 'top-right', heading, hideAfter: 4 });
+              console.error("Error while adding user: ", err);
+            })
             console.log("Result: ", result);
         }
     }
@@ -36,7 +54,7 @@ function SignIn() {
     }
 
     const isMissingRequiredValues = () => {
-        if(!email || !password || inValidEmail) return true;
+        if(!email || !password || inValidEmail()) return true;
         else return false;
     }
 
