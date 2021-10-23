@@ -11,45 +11,57 @@ import Typography from '../components/Typography';
 import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 // services
-import { getUser } from "../services/user";
+import { getUser, setLogInUser } from "../services/user";
 
 function SignIn() {
     const DEFAULT_ERR_STATE = {email: false, password: false};  
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
+    const [loading, setLoading] = useState(false);
+
+    const authenticateUser = () => {
+      getUser({ id: email, password })
+      .then(res => {
+        if(!res.data || (res.data && !res.data.length) || (res.data && res.data.length > 1) ) throw new Error("UserNotFound");
+        setLogInUser(res.data[0]).then(res => {
+          const { hide } = cogoToast.success('Authenticated Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
+            hide();
+          }, hideAfter: 4 });
+        });
+      })
+      .catch(err => {
+        let msg = "Something went wrong, please refresh page and try again.";
+        let heading = "Error";
+        if(err.message === "UserNotFound") { 
+          msg = "Login Failed. Please check entered email/password are right.";
+          heading = "UNAUTHORIZED"
+        }
+        const {hide} = cogoToast.error(
+          msg, 
+          { position: 'top-right', heading, hideAfter: 0, onClick: () => {
+            hide();
+          } }
+          );
+        console.error("Error while adding user: ", err);
+      })
+    }
   
     const handleSubmit = () => {
         const isInvalid = isMissingRequiredValues();
         let errState = DEFAULT_ERR_STATE;
+        setLoading(true);
         if(isInvalid) {
           if(!email) errState.email = true;
           if(email && inValidEmail()) errState.email = true;
           if(!password) errState.password = true;
           setInputErr(errState);
+          setLoading(false);
         } else {
-            let result = { email, password };
-            getUser({ id: email, password }).then(res => {
-              if(!res.data || (res.data && !res.data.length) ) throw new Error("UserNotFound");
-              const { hide } = cogoToast.success('Authentication Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
-                hide();
-              }, hideAfter: 4 });
-            }).catch(err => {
-              let msg = "Something went wrong, please refresh page and try again.";
-              let heading = "Error";
-              if(err.message === "UserNotFound") { 
-                msg = "Login Failed. Please check entered email/password are right.";
-                heading = "UNAUTHORIZED"
-              }
-              const {hide} = cogoToast.error(
-                msg, 
-                { position: 'top-right', heading, hideAfter: 0, onClick: () => {
-                  hide();
-                } }
-                );
-              console.error("Error while adding user: ", err);
+            cogoToast.loading('Veryfing entered details, Please do not close this window', { position: 'top-right', heading: "Please Wait..." }).then(() => {
+              authenticateUser();
+              setLoading(false);
             })
-            console.log("Result: ", result);
         }
     }
 
@@ -112,6 +124,7 @@ function SignIn() {
                 color="warning"
                 variant="contained"
                 size="large"
+                disabled={loading}
                 sx={{ minWidth: 200, mt: 3, mb: 2 }}
                 onClick={handleSubmit}
             >
