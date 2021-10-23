@@ -14,6 +14,8 @@ import MenuPopover from './MenuPopover';
 // services
 import { setLogInUser } from "../services/user";
 
+import useAuth from "../utils/useAuth";
+
 const MENU_OPTIONS = [
   {
     label: 'Home',
@@ -67,6 +69,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function AccountPopover({ userInfo }) {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const { setUserAuthentication } = useAuth();
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,7 +80,7 @@ export default function AccountPopover({ userInfo }) {
 
   const handleLogOut = () => {
     setLogInUser({}).then(res => {
-      localStorage.setItem('isUserAuthenticated', "no");
+      setUserAuthentication(false);
       const { hide } = cogoToast.success('Successfully logged out.', { position: 'top-right', heading: 'Success', onClick: () => {
         hide();
       }, hideAfter: 4 });

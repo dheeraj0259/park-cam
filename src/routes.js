@@ -5,13 +5,15 @@ import Page404 from '../src/pages/Page404';
 import SignIn from '../src/pages/SignIn';
 import SignUp from '../src/pages/SignUp';
 
+import useAuth from "../src/utils/useAuth";
+
 function PrivateRoute({ children, ...rest }) {
-  let isUserAuthenticated = localStorage.getItem("isUserAuthenticated");
+  const { isUserAuthenticated } = useAuth();
   return (
     <Route
       {...rest}
       render={({ location }) =>
-      isUserAuthenticated === "yes" ? (
+      isUserAuthenticated ? (
           children
         ) : (
           <Redirect

@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import { MotionContainer, varBounceIn } from '../components/animate';
 // services
 import { getUser, setLogInUser } from "../services/user";
+import useAuth from "../utils/useAuth";
 
 function SignIn() {
     const DEFAULT_ERR_STATE = {email: false, password: false};  
@@ -20,12 +21,14 @@ function SignIn() {
     const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
     const [loading, setLoading] = useState(false);
 
+    const { setUserAuthentication } = useAuth();
+
     const authenticateUser = () => {
       getUser({ id: email, password })
       .then(res => {
         if(!res.data || (res.data && !res.data.length) || (res.data && res.data.length > 1) ) throw new Error("UserNotFound");
         setLogInUser(res.data[0]).then(res => {
-          localStorage.setItem('isUserAuthenticated', "yes");
+          setUserAuthentication(true);
           const { hide } = cogoToast.success('Authenticated Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
             hide();
           }, hideAfter: 4 });
