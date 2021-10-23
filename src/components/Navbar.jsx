@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Login, AppRegistration } from '@mui/icons-material';
 
 // material
@@ -5,7 +6,8 @@ import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import "../styles/navbar.css";
 
-// ----------------------------------------------------------------------
+// services
+import { getLoggedInUser } from "../services/user";
 
 const DRAWER_WIDTH = 0;
 const APPBAR_MOBILE = 64;
@@ -34,6 +36,14 @@ const Logo = ({sx}) => {
 }
 
 export default function Navbar() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  useEffect(() => {
+    getLoggedInUser().then(res => {
+      setLoggedInUser(res.data);
+    }).catch(err => console.error("Error getting logged in user: ", err));
+  }, [])
+  console.log("Logged in: ", loggedInUser);
   return (
     <RootStyle>
       <ToolbarStyle>

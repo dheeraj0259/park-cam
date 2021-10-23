@@ -12,6 +12,9 @@ export const addUser = async(userInfo) => {
     return await customAxios.post("/users", userInfo);
 }
 
+export const getLoggedInUser = async() => {
+    return await customAxios.get("/loggedInUser");
+}
 export const setLogInUser = async(userInfo) => {
     return await customAxios.post("/loggedInUser", userInfo);
 }
