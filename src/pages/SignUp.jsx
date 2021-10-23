@@ -206,7 +206,7 @@ function SignUp() {
             sx={{ py: { xs: 4, md: 8 }, px: { xs: 3, md: 6 } }}
           >
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign Up
+            SIGN UP
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2" align="center">
             <Link color="error" href="/sign-in/" underline="always">

@@ -154,7 +154,7 @@ function SignIn() {
             sx={{ py: { xs: 4, md: 8 }, px: { xs: 3, md: 6 } }}
           >
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            SIGN IN
           </Typography>
           <Typography sx={{ mt: 3 }} variant="body2" align="center">
             {'Not a member yet? '}
