@@ -108,7 +108,7 @@ export default function AccountPopover({ userInfo }) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         variant="dot"
       >
-        <Avatar src="/static/man.png" alt="photoURL" />
+        <Avatar src={userInfo.gender === "female" ? "/static/woman.png" : "/static/man.png"} alt="photoURL" />
      </StyledBadge>   
       </IconButton>
 
