@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import cogoToast from 'cogo-toast';
+import { useHistory } from "react-router-dom";
 
 import Typography from '../components/Typography';
 import Button from '../components/Button';
@@ -22,6 +23,7 @@ function SignIn() {
     const [loading, setLoading] = useState(false);
 
     const { setUserAuthentication } = useAuth();
+    let history = useHistory();
 
     const authenticateUser = () => {
       getUser({ id: email, password })
@@ -32,6 +34,7 @@ function SignIn() {
           const { hide } = cogoToast.success('Authenticated Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
             hide();
           }, hideAfter: 4 });
+          setTimeout(() => history.push("/dashboard"), 2000);
         });
       })
       .catch(err => {
