@@ -12,14 +12,6 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 // components
 import MenuPopover from './MenuPopover';
 
-// ----------------------------------------------------------------------
-
-const account = {
-    displayName: 'Jaydon Frankie',
-    email: 'demo@minimals.cc',
-    photoURL: '/static/mock-images/avatars/avatar_default.jpg'
-  };
-
 const MENU_OPTIONS = [
   {
     label: 'Home',
@@ -116,7 +108,7 @@ export default function AccountPopover({ userInfo }) {
         open={open}
         onClose={handleClose}
         anchorEl={anchorRef.current}
-        sx={{ width: 220 }}
+        sx={{ width: 220, borderRadius: 2, backgroundColor: "#ffc007" }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
