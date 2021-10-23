@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Login, AppRegistration } from '@mui/icons-material';
 
 // material

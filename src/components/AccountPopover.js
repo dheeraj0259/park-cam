@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import cogoToast from 'cogo-toast';
 // material
