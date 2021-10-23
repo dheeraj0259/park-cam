@@ -1,16 +1,18 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
+import cogoToast from 'cogo-toast';
+// material
+import { alpha, styled } from '@mui/material/styles';
+import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
-// material
-import { alpha } from '@mui/material/styles';
-import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 // components
 import MenuPopover from './MenuPopover';
+// services
+import { setLogInUser } from "../services/user";
 
 const MENU_OPTIONS = [
   {
@@ -72,6 +74,15 @@ export default function AccountPopover({ userInfo }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleLogOut = () => {
+    setLogInUser({}).then(res => {
+      localStorage.setItem('isUserAuthenticated', "no");
+      const { hide } = cogoToast.success('Successfully logged out.', { position: 'top-right', heading: 'Success', onClick: () => {
+        hide();
+      }, hideAfter: 4 });
+    });
+  }
 
   return (
     <>
@@ -135,7 +146,7 @@ export default function AccountPopover({ userInfo }) {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button fullWidth color="inherit" variant="outlined" onClick={handleLogOut}>
             Logout
           </Button>
         </Box>
