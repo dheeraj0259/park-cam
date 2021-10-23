@@ -11,6 +11,8 @@ import "../styles/navbar.css";
 // services
 import { getLoggedInUser } from "../services/user";
 
+import useAuth from "../utils/useAuth";
+
 const DRAWER_WIDTH = 0;
 const APPBAR_MOBILE = 64;
 const APPBAR_DESKTOP = 92;
@@ -39,6 +41,7 @@ const Logo = ({sx}) => {
 
 export default function Navbar() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  const { isUserAuthenticated } = useAuth();
 
   useEffect(() => {
     getLoggedInUser().then(res => {
@@ -74,7 +77,7 @@ export default function Navbar() {
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-        {loggedInUser ? renderLoggedInActions(): renderLoggedOffActions()}
+        {isUserAuthenticated ? renderLoggedInActions(): renderLoggedOffActions()}
         </Stack>
       </ToolbarStyle>
     </RootStyle>
