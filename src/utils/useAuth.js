@@ -8,6 +8,11 @@ export default function useAuth() {
 
   const [isUserAuthenticated, setUserAuthenticated] = useState(getUserAuthentication());
 
+  setInterval(() => {
+    const rst = getUserAuthentication();
+    setUserAuthenticated(rst);
+  }, 2000)
+
   const saveUserAuthentication = auth => {
     localStorage.setItem('isUserAuthenticated', JSON.stringify(auth));
     setUserAuthenticated(auth);

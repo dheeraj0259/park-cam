@@ -8,9 +8,6 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import AccountPopover from './AccountPopover';
 import "../styles/navbar.css";
 
-// services
-import { getLoggedInUser } from "../services/user";
-
 import useAuth from "../utils/useAuth";
 
 const DRAWER_WIDTH = 0;
@@ -40,15 +37,9 @@ const Logo = ({sx}) => {
 }
 
 export default function Navbar() {
-  const [loggedInUser, setLoggedInUser] = useState({});
   const { isUserAuthenticated } = useAuth();
 
-  useEffect(() => {
-    getLoggedInUser().then(res => {
-      setLoggedInUser(res.data);
-    }).catch(err => console.error("Error getting logged in user: ", err));
-  }, [])
-  console.log("Logged in: ", loggedInUser);
+  console.log("Logged in: ", isUserAuthenticated);
   const renderLoggedOffActions = () => {
     return (
       <span>
@@ -65,7 +56,7 @@ export default function Navbar() {
   const renderLoggedInActions = () => {
     return (
       <span>
-      <AccountPopover userInfo={loggedInUser} />
+      <AccountPopover />
       </span>
     )
   }

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import cogoToast from 'cogo-toast';
@@ -12,7 +12,7 @@ import Badge from '@mui/material/Badge';
 // components
 import MenuPopover from './MenuPopover';
 // services
-import { setLogInUser } from "../services/user";
+import { getLoggedInUser, setLogInUser } from "../services/user";
 
 import useAuth from "../utils/useAuth";
 
@@ -66,10 +66,19 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }));
 // ----------------------------------------------------------------------
 
-export default function AccountPopover({ userInfo }) {
+export default function AccountPopover() {
+  const [userInfo, setLoggedInUser] = useState({});
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const { setUserAuthentication } = useAuth();
+
+  useEffect(() => {
+    getLoggedInUser().then(res => {
+      setLoggedInUser(res.data);
+    }).catch(err => console.error("Error getting logged in user: ", err));
+    // to fix memory leaks while unmounting the component
+    return () => {}
+  }, [])
 
   const handleOpen = () => {
     setOpen(true);
@@ -156,8 +165,4 @@ export default function AccountPopover({ userInfo }) {
       </MenuPopover>
     </>
   );
-}
-
-AccountPopover.propTypes = {
-    userInfo: PropTypes.object.isRequired,
 }
