@@ -89,7 +89,7 @@ export default function AccountPopover() {
   const handleLogOut = () => {
     setLogInUser({}).then(res => {
       setUserAuthentication(false);
-      const { hide } = cogoToast.success('Successfully logged out.', { position: 'top-right', heading: 'Success', onClick: () => {
+      const { hide } = cogoToast.success('Thank you for using our services.You have been successfully logged out.', { position: 'top-right', heading: 'Success', onClick: () => {
         hide();
       }, hideAfter: 4 });
     });
