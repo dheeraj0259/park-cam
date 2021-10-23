@@ -25,6 +25,7 @@ function SignIn() {
       .then(res => {
         if(!res.data || (res.data && !res.data.length) || (res.data && res.data.length > 1) ) throw new Error("UserNotFound");
         setLogInUser(res.data[0]).then(res => {
+          localStorage.setItem('isUserAuthenticated', "yes");
           const { hide } = cogoToast.success('Authenticated Successfully! Please wait while being redirected.', { position: 'top-right', heading: 'Success', onClick: () => {
             hide();
           }, hideAfter: 4 });
