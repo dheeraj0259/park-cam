@@ -4,6 +4,7 @@ import Home from '../src/pages/Home';
 import Page404 from '../src/pages/Page404';
 import SignIn from '../src/pages/SignIn';
 import SignUp from '../src/pages/SignUp';
+import Products from '../src/pages/Products';
 
 import useAuth from "../src/utils/useAuth";
 
@@ -42,7 +43,7 @@ export default function Router() {
             <SignIn />
           </Route>
           <PrivateRoute path="/dashboard">
-            <Home />
+            <Products />
           </PrivateRoute>
           <Route path="*">
             <Page404 />
