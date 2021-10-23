@@ -3,6 +3,10 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import cogoToast from 'cogo-toast';
@@ -19,6 +23,7 @@ function SignUp() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
   const [inputErr, setInputErr] = useState(DEFAULT_ERR_STATE);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -56,7 +61,7 @@ function SignUp() {
         setInputErr(errState);
         setLoading(true);
         // add user to db
-        let result = { firstName, lastName, id: email, password };
+        let result = { firstName, lastName, id: email, password, gender };
         addUser(result).then(res => {
           setTimeout(() => {
           const { hide } = cogoToast.success('Congratulations, your account has been successfully created.', { position: 'top-right', heading: 'Success',   onClick: () => {
@@ -100,7 +105,7 @@ function SignUp() {
       return (
         <Box component="form" noValidate sx={{ mt: 6 }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
              <TextField
               error={inputErr["firstName"]}
               required
@@ -111,7 +116,7 @@ function SignUp() {
               onChange={(event) => handleLocalState("firstName", event.target.value, setFirstName)}
               />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
              <TextField
               error={inputErr["lastName"]}
               required
@@ -121,6 +126,23 @@ function SignUp() {
               value={lastName}
               onChange={(event) => handleLocalState("lastName", event.target.value, setLastName)}
               />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+          <FormControl fullWidth>
+            <InputLabel color="warning" id="demo-simple-select-label">Gender</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={gender}
+              label="Gender"
+              color="warning"
+              onChange={(event) => setGender(event.target.value)}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="">None</MenuItem>
+           </Select>
+      </FormControl>
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
