@@ -44,6 +44,31 @@ export default function Navbar() {
     }).catch(err => console.error("Error getting logged in user: ", err));
   }, [])
   console.log("Logged in: ", loggedInUser);
+  const renderLoggedOffActions = () => {
+    return (
+      <span>
+      <IconButton href="/sign-up">
+      <AppRegistration fontSize="large" sx={{ color: "black" }} />
+      </IconButton>
+      <IconButton href="/sign-in">
+      <Login fontSize="large" sx={{ color: "#ffb500" }} />
+      </IconButton>
+      </span>
+    )
+  }
+
+  const renderLoggedInActions = () => {
+    return (
+      <span>
+      <IconButton href="/sign-up">
+      <AppRegistration fontSize="large" sx={{ color: "black" }} />
+      </IconButton>
+      <IconButton href="/sign-in">
+      <Login fontSize="large" sx={{ color: "#ffb500" }} />
+      </IconButton>
+      </span>
+    )
+  }
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -52,12 +77,7 @@ export default function Navbar() {
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-        <IconButton href="/sign-up">
-        <AppRegistration fontSize="large" sx={{ color: "black" }} />
-        </IconButton>
-        <IconButton href="/sign-in">
-        <Login fontSize="large" sx={{ color: "#ffb500" }} />
-        </IconButton>
+        {loggedInUser ? renderLoggedInActions(): renderLoggedOffActions()}
         </Stack>
       </ToolbarStyle>
     </RootStyle>
