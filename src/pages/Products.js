@@ -1,7 +1,7 @@
 // material
 import { Container, Stack, Typography } from '@mui/material';
 // components
-import Page from '../components/Page';
+import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
 //
 import PRODUCTS from './mockdata';
@@ -13,9 +13,9 @@ export default function Products() {
   return (
       <Container sx={{ mt: 12 }}>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
+          Registered Vehicle List
         </Typography>
-
+        <SearchBar />
         <Stack
           direction="row"
           flexWrap="wrap-reverse"
