@@ -4,13 +4,11 @@ import SearchIcon from '@mui/icons-material/Search';
 // material
 import { styled, alpha } from '@mui/material/styles';
 import {
-  Box,
   Input,
   Slide,
   Button,
   InputAdornment,
   ClickAwayListener,
-  IconButton,
   Stack
 } from '@mui/material';
 
@@ -28,8 +26,8 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
   position: 'absolute',
   alignItems: 'center',
   height: APPBAR_MOBILE,
-  backdropFilter: 'blur(6px)',
-  WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
+  backdropFilter: 'blur(50px)',
+  WebkitBackdropFilter: 'blur(50px)', // Fix on Mobile
   padding: theme.spacing(0, 3),
   boxShadow: theme.customShadows.z8,
   backgroundColor: `${alpha(theme.palette.background.default, 0.72)}`,
