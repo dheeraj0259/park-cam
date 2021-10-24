@@ -27,12 +27,12 @@ export default function ShopProductCard({ vehicle }) {
   const { plateNo, imgPath, owner, status } = vehicle;
 
   return (
-    <Card>
+    <Card sx={{ mb: 5 }}>
       <Box sx={{ pt: '100%', position: 'relative' }}>
         {status && (
           <Label
             variant="filled"
-            color="info"
+            color={ status === "verified" ? "info" : "error" }
             sx={{
               zIndex: 9,
               top: 16,
@@ -50,7 +50,7 @@ export default function ShopProductCard({ vehicle }) {
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle2" noWrap>
-            {plateNo}
+            LICENCE PLATE NO: {plateNo}
           </Typography>
         </Link>
 
@@ -61,10 +61,9 @@ export default function ShopProductCard({ vehicle }) {
               variant="body1"
               sx={{
                 color: 'text.disabled',
-                textDecoration: 'line-through'
               }}
             >
-              {owner}
+              OWNER: {owner}
             </Typography>
           </Typography>
         </Stack>
