@@ -5,26 +5,35 @@ import { Container, Stack, Typography } from '@mui/material';
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
 //
-import PRODUCTS from './mockdata';
+import FuzzySearch from 'fuzzy-search';
 import { getVehicles } from '../services/vehicle'
 
 // ----------------------------------------------------------------------
 
 export default function Products() {
     const [vehicles, setVehicles] = useState(null);
+    const [filteredVehicles, setFilteredVehicles] = useState(null);
 
     useEffect(() => {
         getVehicles().then(res => {
             setVehicles(res.data);
+            setFilteredVehicles(res.data);
         })
     }, [])
+
+    const searchVehicles = (value) => {
+        const searcher = new FuzzySearch(vehicles, ['plateNo', 'owner', 'status']);
+
+        const result = searcher.search(value);
+        setFilteredVehicles(result);
+    }
 
   return (
       <Container sx={{ mt: 12 }}>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Registered Vehicle List
         </Typography>
-        <SearchBar />
+        <SearchBar filter={searchVehicles} />
         <Stack
           direction="row"
           flexWrap="wrap-reverse"
@@ -36,7 +45,7 @@ export default function Products() {
           </Stack>
         </Stack>
 
-        {vehicles && vehicles.length ? <ProductList vehicles={vehicles} /> : "" }
+        {filteredVehicles && filteredVehicles.length ? <ProductList vehicles={filteredVehicles} /> : "" }
       </Container>
   );
 }

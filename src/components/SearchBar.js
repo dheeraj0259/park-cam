@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
 // material
 import { styled, alpha } from '@mui/material/styles';
@@ -40,7 +41,11 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Searchbar() {
+Searchbar.propTypes = {
+  filter: PropTypes.func.isRequired
+};
+
+export default function Searchbar({filter}) {
   const [isOpen, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -74,6 +79,7 @@ export default function Searchbar() {
               fullWidth
               disableUnderline
               placeholder="Search…"
+              onChange={(event) => filter(event.target.value)}
               startAdornment={
                 <InputAdornment position="start">
                     <SearchIcon sx={{ color: 'text.disabled', width: 20, height: 20 }} />
