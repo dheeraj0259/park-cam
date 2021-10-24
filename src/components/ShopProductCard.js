@@ -3,9 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import PersonIcon from '@mui/icons-material/Person';
+import FingerprintIcon from '@mui/icons-material/Fingerprint';
+import TodayIcon from '@mui/icons-material/Today';
 //
 import Label from './Label';
-import ColorPreview from './ColorPreview';
 
 // ----------------------------------------------------------------------
 
@@ -48,13 +50,25 @@ export default function ShopProductCard({ vehicle }) {
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Link to="#" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle2" noWrap>
-            LICENCE PLATE NO: {plateNo}
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Box
+            component="img"
+            src="/static/license-plate.png"
+            alt="graph"
+            sx={{ height: 30 }}
+            />
+          <Typography variant="subtitle1">
+            <Typography
+              component="span"
+              variant="body1"
+            >
+             {plateNo}
+            </Typography>
           </Typography>
-        </Link>
+        </Stack>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <PersonIcon style={{ fontSize: 20, color: "#7A0C2E" }} />
           <Typography variant="subtitle1">
             <Typography
               component="span"
@@ -63,7 +77,22 @@ export default function ShopProductCard({ vehicle }) {
                 color: 'text.disabled',
               }}
             >
-              OWNER: {owner}
+              {owner}
+            </Typography>
+          </Typography>
+        </Stack>
+
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <TodayIcon style={{ fontSize: 20, color: "#7A0C2E" }} />
+          <Typography variant="subtitle1">
+            <Typography
+              component="span"
+              variant="body1"
+              sx={{
+                color: 'text.disabled',
+              }}
+            >
+              {new Date().toDateString()}
             </Typography>
           </Typography>
         </Stack>

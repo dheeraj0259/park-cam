@@ -16,7 +16,18 @@ export default function Products() {
 
     useEffect(() => {
         getVehicles().then(res => {
-            setVehicles(res.data);
+            setVehicles(res.data.sort((a,b) => {  
+                let nameA = a.status.toUpperCase();
+                let nameB = b.status.toUpperCase();
+                if (nameB < nameA) {
+                  return -1;
+                }
+                if (nameB > nameA) {
+                  return 1;
+                }
+              
+                // names must be equal
+                return 0; }));
             setFilteredVehicles(res.data);
         })
     }, [])
@@ -45,7 +56,7 @@ export default function Products() {
           </Stack>
         </Stack>
 
-        {filteredVehicles && filteredVehicles.length ? <ProductList vehicles={filteredVehicles} /> : "" }
+        {filteredVehicles && filteredVehicles.length ? <ProductList vehicles={filteredVehicles.sort((a, b) => { return a.status - b.status } )} /> : "" }
       </Container>
   );
 }
