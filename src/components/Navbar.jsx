@@ -3,7 +3,7 @@ import { Login, AppRegistration } from '@mui/icons-material';
 
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, IconButton, Tooltip } from '@mui/material';
 
 import AccountPopover from './AccountPopover';
 import "../styles/navbar.css";
@@ -43,12 +43,16 @@ export default function Navbar() {
   const renderLoggedOffActions = () => {
     return (
       <span>
+      <Tooltip title="Sign Up">  
       <IconButton href="/sign-up">
       <AppRegistration fontSize="large" sx={{ color: "black" }} />
       </IconButton>
+      </Tooltip>
+      <Tooltip title="Sign In">
       <IconButton href="/sign-in">
       <Login fontSize="large" sx={{ color: "#ffb500" }} />
       </IconButton>
+      </Tooltip>
       </span>
     )
   }
