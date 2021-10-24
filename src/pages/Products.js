@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 // material
 import { Container, Stack, Typography } from '@mui/material';
 // components
@@ -5,10 +6,18 @@ import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
 //
 import PRODUCTS from './mockdata';
+import { getVehicles } from '../services/vehicle'
 
 // ----------------------------------------------------------------------
 
 export default function Products() {
+    const [vehicles, setVehicles] = useState(null);
+
+    useEffect(() => {
+        getVehicles().then(res => {
+            setVehicles(res.data);
+        })
+    }, [])
 
   return (
       <Container sx={{ mt: 12 }}>
@@ -27,7 +36,7 @@ export default function Products() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} />
+        {vehicles && vehicles.length ? <ProductList vehicles={vehicles} /> : "" }
       </Container>
   );
 }

@@ -20,11 +20,11 @@ const ProductImgStyle = styled('img')({
 // ----------------------------------------------------------------------
 
 ShopProductCard.propTypes = {
-  product: PropTypes.object
+    vehicle: PropTypes.object
 };
 
-export default function ShopProductCard({ product }) {
-  const { name, cover, price, colors, status, priceSale } = product;
+export default function ShopProductCard({ vehicle }) {
+  const { plateNo, imgPath, owner, status } = vehicle;
 
   return (
     <Card>
@@ -32,7 +32,7 @@ export default function ShopProductCard({ product }) {
         {status && (
           <Label
             variant="filled"
-            color={(status === 'sale' && 'error') || 'info'}
+            color="info"
             sx={{
               zIndex: 9,
               top: 16,
@@ -44,18 +44,17 @@ export default function ShopProductCard({ product }) {
             {status}
           </Label>
         )}
-        <ProductImgStyle alt={name} src={cover} />
+        <ProductImgStyle alt={plateNo} src={imgPath} />
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle2" noWrap>
-            {name}
+            {plateNo}
           </Typography>
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={colors} />
           <Typography variant="subtitle1">
             <Typography
               component="span"
@@ -65,7 +64,7 @@ export default function ShopProductCard({ product }) {
                 textDecoration: 'line-through'
               }}
             >
-              {priceSale}
+              {owner}
             </Typography>
           </Typography>
         </Stack>
