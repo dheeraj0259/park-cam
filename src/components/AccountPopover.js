@@ -5,8 +5,7 @@ import cogoToast from 'cogo-toast';
 import { alpha, styled } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
-import SettingsIcon from '@mui/icons-material/Settings';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Badge from '@mui/material/Badge';
 // components
 import MenuPopover from './MenuPopover';
@@ -26,23 +25,14 @@ const MENU_OPTIONS = [
     linkTo: '/'
   },
   {
-    label: 'Profile',
-    icon: <PersonIcon sx={{
+    label: 'Dashboard',
+    icon: <DashboardIcon sx={{
         mr: 2,
         width: 24,
         height: 24
       }} />,
-    linkTo: '#'
+    linkTo: '/dashboard'
   },
-  {
-    label: 'Settings',
-    icon: <SettingsIcon sx={{
-        mr: 2,
-        width: 24,
-        height: 24
-      }} />,
-    linkTo: '#'
-  }
 ];
 
 

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 // layouts
 import Home from '../src/pages/Home';
 import Page404 from '../src/pages/Page404';
@@ -31,7 +31,6 @@ function PrivateRoute({ children, ...rest }) {
 
 export default function Router() {
   return (
-    <BrowserRouter>
       <Switch>
           <Route exact path="/">
             <Home />
@@ -49,6 +48,5 @@ export default function Router() {
             <Page404 />
           </Route>
        </Switch>
-      </BrowserRouter>
   );
 }
