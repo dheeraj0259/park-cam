@@ -4,8 +4,7 @@ import cogoToast from 'cogo-toast';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import { Home, Person, Dashboard, Add, Remove, TrackChanges, Videocam, PhotoCamera } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
 // components
 import MenuPopover from './MenuPopover';
@@ -17,7 +16,7 @@ import useAuth from "../utils/useAuth";
 const MENU_OPTIONS = [
   {
     label: 'Home',
-    icon: <HomeIcon sx={{
+    icon: <Home sx={{
         mr: 2,
         width: 24,
         height: 24
@@ -25,8 +24,62 @@ const MENU_OPTIONS = [
     linkTo: '/'
   },
   {
+    label: 'Profile',
+    icon: <Person sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
     label: 'Dashboard',
-    icon: <DashboardIcon sx={{
+    icon: <Dashboard sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
+    label: 'Add Vehicle',
+    icon: <Add sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
+    label: 'Delete Vehicle',
+    icon: <Remove sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
+    label: 'View Registered vehicle logs',
+    icon: <TrackChanges sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
+    label: 'View Live Video',
+    icon: <Videocam sx={{
+        mr: 2,
+        width: 24,
+        height: 24
+      }} />,
+    linkTo: '/dashboard'
+  },
+  {
+    label: 'Shut Down Camera',
+    icon: <PhotoCamera sx={{
         mr: 2,
         width: 24,
         height: 24
@@ -120,7 +173,7 @@ export default function AccountPopover() {
         open={open}
         onClose={handleClose}
         anchorEl={anchorRef.current}
-        sx={{ width: 220, borderRadius: 2 }}
+        sx={{ width: 258, borderRadius: 2 }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
