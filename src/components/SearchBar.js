@@ -71,7 +71,7 @@ export default function Searchbar({filter}) {
         </Stack>
 
         <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
-          <SearchbarStyle style={{ marginTop: 100, backgroundColor: "#fbb5031f" }}>
+          <SearchbarStyle style={{ marginTop: 90, backgroundColor: "#fbb5031f" }}>
             <Input
               autoFocus
               fullWidth

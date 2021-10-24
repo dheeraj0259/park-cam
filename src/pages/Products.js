@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 // material
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography, Box } from '@mui/material';
 // components
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
 //
 import FuzzySearch from 'fuzzy-search';
 import { getVehicles } from '../services/vehicle'
-
-// ----------------------------------------------------------------------
 
 export default function Products() {
     const [vehicles, setVehicles] = useState(null);
@@ -41,9 +39,23 @@ export default function Products() {
 
   return (
       <Container sx={{ mt: 12 }}>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Registered Vehicle List
-        </Typography>
+        <Stack
+          direction="row"
+          flexWrap="wrap-reverse"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ mb: 5 }}
+        >
+            <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            >
+            <Typography variant="h4">
+            Registered Vehicle List
+            </Typography>
+            </Box>
+        </Stack>
         <SearchBar filter={searchVehicles} />
         <Stack
           direction="row"

@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Box, Card, Link, Typography, Stack } from '@mui/material';
+import { Box, Card, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
-import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import TodayIcon from '@mui/icons-material/Today';
 //
 import Label from './Label';
