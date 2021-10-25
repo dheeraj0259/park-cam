@@ -14,10 +14,10 @@ const Home = () => {
            <Grid style={{ marginTop: "11vh" }} item xs={12}>
            <ProductInfo />
            </Grid>
-           <Grid item xs={12}>
+           { !isUserAuthenticated && <Grid item xs={12}>
            <ProductServices />
-           </Grid>
-           { isUserAuthenticated && <Grid item xs={12}>
+           </Grid> }
+           { isUserAuthenticated && <Grid style={{ backgroundColor: "#fbb5031f" }} item xs={12}>
            <ServiceList />
            </Grid> }
            <Grid item xs={12}>
